@@ -16,7 +16,7 @@
       color: #333;
     }
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 20px;
     }
@@ -32,10 +32,10 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     /* Display Styles */
-    #digitalClock,
+    .clock-display,
     #stopwatchDisplay,
     #countdownDisplay {
-      font-size: 2em;
+      font-size: 1.5em;
       text-align: center;
       margin: 10px 0;
       letter-spacing: 1px;
@@ -74,10 +74,10 @@
     }
     /* Responsive adjustments */
     @media (max-width: 600px) {
-      #digitalClock,
+      .clock-display,
       #stopwatchDisplay,
       #countdownDisplay {
-        font-size: 1.5em;
+        font-size: 1.2em;
       }
       button {
         font-size: 0.9em;
@@ -94,10 +94,21 @@
   <div class="container">
     <h1>Responsive Time Application</h1>
 
-    <!-- Live Digital Clock Section -->
+    <!-- Live Digital Clocks Section -->
     <div class="section clock-section">
-      <h2>Live Digital Clock</h2>
-      <div id="digitalClock">00:00:00 AM</div>
+      <h2>Live Digital Clocks</h2>
+      <!-- U.S. Time Zones -->
+      <div id="easternClock" class="clock-display">Eastern (New York): 00:00:00 AM</div>
+      <div id="centralClock" class="clock-display">Central (Chicago): 00:00:00 AM</div>
+      <div id="mountainClock" class="clock-display">Mountain (Denver): 00:00:00 AM</div>
+      <div id="pacificClock" class="clock-display">Pacific (Los Angeles): 00:00:00 AM</div>
+      <div id="alaskaClock" class="clock-display">Alaska (Anchorage): 00:00:00 AM</div>
+      <div id="hawaiiClock" class="clock-display">Hawaii (Honolulu): 00:00:00 AM</div>
+      <!-- International Time Zones -->
+      <div id="londonClock" class="clock-display">London: 00:00:00</div>
+      <div id="tokyoClock" class="clock-display">Tokyo: 00:00:00 AM</div>
+      <div id="hongkongClock" class="clock-display">Hong Kong: 00:00:00 AM</div>
+      <div id="dubaiClock" class="clock-display">Dubai: 00:00:00 AM</div>
     </div>
 
     <!-- Stopwatch Section -->
@@ -129,27 +140,116 @@
 
   <script>
     /* ================================
-       Live Digital Clock Functionality
+       Live Digital Clocks Functionality
        ================================ */
-    function updateDigitalClock() {
+    function updateClocks() {
       const now = new Date();
-      let hours = now.getHours();
-      const minutes = now.getMinutes();
-      const seconds = now.getSeconds();
-      // Determine AM or PM
-      const ampm = hours >= 12 ? "PM" : "AM";
-      // Convert to 12-hour format
-      hours = hours % 12;
-      hours = hours ? hours : 12;
-      // Pad with zeros for consistency
-      const hStr = hours < 10 ? "0" + hours : hours;
-      const mStr = minutes < 10 ? "0" + minutes : minutes;
-      const sStr = seconds < 10 ? "0" + seconds : seconds;
-      document.getElementById("digitalClock").innerText = `${hStr}:${mStr}:${sStr} ${ampm}`;
+
+      // USA Time Zones
+      document.getElementById("easternClock").innerText =
+        "Eastern (New York): " +
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+          timeZone: "America/New_York"
+        });
+
+      document.getElementById("centralClock").innerText =
+        "Central (Chicago): " +
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+          timeZone: "America/Chicago"
+        });
+
+      document.getElementById("mountainClock").innerText =
+        "Mountain (Denver): " +
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+          timeZone: "America/Denver"
+        });
+
+      document.getElementById("pacificClock").innerText =
+        "Pacific (Los Angeles): " +
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+          timeZone: "America/Los_Angeles"
+        });
+
+      document.getElementById("alaskaClock").innerText =
+        "Alaska (Anchorage): " +
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+          timeZone: "America/Anchorage"
+        });
+
+      document.getElementById("hawaiiClock").innerText =
+        "Hawaii (Honolulu): " +
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+          timeZone: "Pacific/Honolulu"
+        });
+
+      // International Time Zones
+      document.getElementById("londonClock").innerText =
+        "London: " +
+        now.toLocaleTimeString("en-GB", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+          timeZone: "Europe/London"
+        });
+
+      document.getElementById("tokyoClock").innerText =
+        "Tokyo: " +
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+          timeZone: "Asia/Tokyo"
+        });
+
+      document.getElementById("hongkongClock").innerText =
+        "Hong Kong: " +
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+          timeZone: "Asia/Hong_Kong"
+        });
+
+      document.getElementById("dubaiClock").innerText =
+        "Dubai: " +
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+          timeZone: "Asia/Dubai"
+        });
     }
-    // Update clock immediately and then every second
-    updateDigitalClock();
-    setInterval(updateDigitalClock, 1000);
+    // Update clocks immediately and then every second
+    updateClocks();
+    setInterval(updateClocks, 1000);
 
     /* ================================
        Stopwatch Functionality
@@ -164,16 +264,15 @@
       const elapsedTime = Date.now() - stopwatchStartTime + stopwatchElapsed;
       const minutes = Math.floor(elapsedTime / 60000);
       const seconds = Math.floor((elapsedTime % 60000) / 1000);
-      // Display hundredths of a second (10 ms increments)
+      // Hundredths of a second
       const milliseconds = Math.floor((elapsedTime % 1000) / 10);
-      // Pad values with zeros for a consistent display
+      // Format values with leading zeros
       const mStr = minutes < 10 ? "0" + minutes : minutes;
       const sStr = seconds < 10 ? "0" + seconds : seconds;
       const msStr = milliseconds < 10 ? "0" + milliseconds : milliseconds;
       document.getElementById("stopwatchDisplay").innerText = `${mStr}:${sStr}:${msStr}`;
     }
 
-    // Start Stopwatch
     document.getElementById("startStopwatch").addEventListener("click", function () {
       if (!stopwatchRunning) {
         stopwatchStartTime = Date.now();
@@ -182,7 +281,6 @@
       }
     });
 
-    // Pause Stopwatch
     document.getElementById("pauseStopwatch").addEventListener("click", function () {
       if (stopwatchRunning) {
         clearInterval(stopwatchInterval);
@@ -191,7 +289,6 @@
       }
     });
 
-    // Reset Stopwatch
     document.getElementById("resetStopwatch").addEventListener("click", function () {
       clearInterval(stopwatchInterval);
       stopwatchStartTime = 0;
@@ -215,16 +312,13 @@
       document.getElementById("countdownDisplay").innerText = `${mStr}:${sStr}`;
     }
 
-    // Start Countdown
     document.getElementById("startCountdown").addEventListener("click", function () {
       if (!countdownRunning) {
-        // If no time is set or countdown reached 0, get values from inputs
         if (countdownTimeLeft <= 0) {
           const minutesInput = parseInt(document.getElementById("countdownMinutes").value) || 0;
           const secondsInput = parseInt(document.getElementById("countdownSeconds").value) || 0;
           countdownTimeLeft = minutesInput * 60 + secondsInput;
         }
-        // If time is zero, do nothing
         if (countdownTimeLeft <= 0) {
           return;
         }
@@ -242,7 +336,6 @@
       }
     });
 
-    // Pause Countdown
     document.getElementById("pauseCountdown").addEventListener("click", function () {
       if (countdownRunning) {
         clearInterval(countdownInterval);
@@ -250,13 +343,11 @@
       }
     });
 
-    // Reset Countdown
     document.getElementById("resetCountdown").addEventListener("click", function () {
       clearInterval(countdownInterval);
       countdownRunning = false;
       countdownTimeLeft = 0;
       document.getElementById("countdownDisplay").innerText = "00:00";
-      // Clear the input fields
       document.getElementById("countdownMinutes").value = "";
       document.getElementById("countdownSeconds").value = "";
     });
